@@ -123,7 +123,7 @@ export const EIP155_CASA_CHAINS = {
     chainId: 421614,
     name: 'Arbitrum Sepolia',
     logo: '/chain-logos/arbitrum.svg',
-    rgb: '242, 242, 242',
+    rgb: '18, 170, 255',
     rpc: 'https://public.stackup.sh/api/v1/node/arbitrum-sepolia',
     namespace: 'eip155',
     smartAccountEnabled: true
@@ -141,7 +141,7 @@ export const EIP155_CASA_CHAINS = {
     chainId: 44787,
     name: 'Celo Alfajores Testnet',
     logo: '/chain-logos/celo.svg',
-    rgb: '242, 242, 242',
+    rgb: '252, 255, 82',
     rpc: 'https://alfajores-forno.celo-testnet.org',
     namespace: 'eip155',
     smartAccountEnabled: true
@@ -150,7 +150,7 @@ export const EIP155_CASA_CHAINS = {
     chainId: 534351,
     name: 'Scroll Sepolia Testnet',
     logo: '/chain-logos/scroll.svg',
-    rgb: '242, 242, 242',
+    rgb: '255, 238, 218',
     rpc: 'https://sepolia-rpc.scroll.io',
     namespace: 'eip155',
     smartAccountEnabled: true
@@ -177,7 +177,7 @@ export const EIP155_CASA_CHAINS = {
     chainId: 245022926,
     name: 'Neon EVM Devnet',
     logo: '/chain-logos/neon.svg',
-    rgb: '242, 242, 242',
+    rgb: '223, 66, 171',
     rpc: 'https://devnet.neonevm.org',
     namespace: 'eip155',
     smartAccountEnabled: true
@@ -186,7 +186,7 @@ export const EIP155_CASA_CHAINS = {
     chainId: 31,
     name: 'Rootstock Testnet',
     logo: '/chain-logos/rootstock.svg',
-    rgb: '242, 242, 242',
+    rgb: '255, 147, 30',
     rpc: 'https://public-node.testnet.rsk.co',
     namespace: 'eip155',
     smartAccountEnabled: true
@@ -195,7 +195,7 @@ export const EIP155_CASA_CHAINS = {
     chainId: 48899,
     name: 'Zircuit Testnet',
     logo: '/chain-logos/zircuit.svg',
-    rgb: '242, 242, 242',
+    rgb: '4, 189, 44',
     rpc: 'https://zircuit1.p2pify.com',
     namespace: 'eip155',
     smartAccountEnabled: true
