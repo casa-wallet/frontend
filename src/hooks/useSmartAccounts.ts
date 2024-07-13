@@ -33,15 +33,14 @@ export default function useSmartAccounts() {
         )
         SettingsStore.setBiconomySmartAccountAddress(biconomySmartAccountAddress)
       }
-      const { casaSmartAccountAddress } = await createOrRestoreCasaSmartAccount(privateKey)
-      SettingsStore.setCasaSmartAccountAddress(casaSmartAccountAddress)
     }
+
+    const { casaSmartAccountAddress } = await createOrRestoreCasaSmartAccount(privateKey)
+    SettingsStore.setCasaSmartAccountAddress(casaSmartAccountAddress)
+
   }
 
   const getAvailableSmartAccounts = () => {
-    if (!smartAccountEnabled) {
-      return []
-    }
     const accounts = []
     for (const [key, lib] of Object.entries(smartAccountWallets)) {
       accounts.push({

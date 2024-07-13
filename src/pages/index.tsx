@@ -18,21 +18,9 @@ import useSmartAccounts from '@/hooks/useSmartAccounts'
 import { useRouter } from 'next/router'
 
 export default function HomePage() {
-  const {
-    testNets,
-    eip155Address,
-    cosmosAddress,
-    solanaAddress,
-    polkadotAddress,
-    nearAddress,
-    multiversxAddress,
-    tronAddress,
-    tezosAddress,
-    kadenaAddress,
-    smartAccountEnabled
-  } = useSnapshot(SettingsStore.state)
   const { getAvailableSmartAccounts } = useSmartAccounts()
   const { push } = useRouter()
+
   return (
     <Fragment>
       <PageHeader title="Accounts">
@@ -43,39 +31,37 @@ export default function HomePage() {
           Testnets
         </Text>
         {Object.entries(EIP155_CASA_CHAINS).map(([caip10, { name, logo, rgb, chainId }]) => {
-          if (smartAccountEnabled) {
-            return (
-              <div key={`${name}-smart`} style={{ marginBottom: 10 }}>
-                {getAvailableSmartAccounts()
-                  .filter(account => {
-                    return account.chain.id === chainId
-                  })
-                  .map(account => {
-                    return (
-                      <div
-                        style={{ marginBottom: 10, cursor: 'pointer' }}
+          return (
+            <div key={`${name}-smart`} style={{ marginBottom: 10 }}>
+              {getAvailableSmartAccounts()
+                .filter(account => {
+                  return account.chain.id === chainId
+                })
+                .map(account => {
+                  return (
+                    <div
+                      style={{ marginBottom: 10, cursor: 'pointer' }}
+                      key={`${name}-${account.type.toLowerCase()}`}
+                      onClick={() =>
+                        push({
+                          pathname: `/accounts/${account.type}:${chainId}:${account.address}`
+                        })
+                      }
+                    >
+                      <AccountCard
                         key={`${name}-${account.type.toLowerCase()}`}
-                        onClick={() =>
-                          push({
-                            pathname: `/accounts/${account.type}:${chainId}:${account.address}`
-                          })
-                        }
-                      >
-                        <AccountCard
-                          key={`${name}-${account.type.toLowerCase()}`}
-                          name={`${account.type} - ${name}`}
-                          logo={logo}
-                          rgb={rgb}
-                          address={account.address}
-                          chainId={caip10.toString()}
-                          data-testid={`chain-card-${caip10.toString()}-${account.type.toLowerCase()}`}
-                        />
-                      </div>
-                    )
-                  })}
-              </div>
-            )
-          }
+                        name={`${account.type} - ${name}`}
+                        logo={logo}
+                        rgb={rgb}
+                        address={account.address}
+                        chainId={caip10.toString()}
+                        data-testid={`chain-card-${caip10.toString()}-${account.type.toLowerCase()}`}
+                      />
+                    </div>
+                  )
+                })}
+            </div>
+          )
         })}
       </Fragment>
     </Fragment>
