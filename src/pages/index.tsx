@@ -42,11 +42,6 @@ export default function HomePage() {
                     <div
                       style={{ marginBottom: 10, cursor: 'pointer' }}
                       key={`${name}-${account.type.toLowerCase()}`}
-                      onClick={() =>
-                        push({
-                          pathname: `/accounts/${account.type}:${chainId}:${account.address}`
-                        })
-                      }
                     >
                       <AccountCard
                         key={`${name}-${account.type.toLowerCase()}`}
