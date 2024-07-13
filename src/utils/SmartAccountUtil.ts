@@ -87,45 +87,11 @@ export function isAllowedKernelChain(chainId: number): boolean {
   return kernelAllowedChains.some(chain => chain.id == chainId)
 }
 
-export async function createOrRestoreKernelSmartAccount(privateKey: string) {
-  const lib = new KernelSmartAccountLib({
-    privateKey,
-    chain: sepolia,
-    sponsored: true,
-    entryPointVersion: 6
-  })
-  await lib.init()
-  const address = lib.getAddress()
-  const key = `${sepolia.id}:${address}`
-  if (!smartAccountWallets[key]) {
-    smartAccountWallets[key] = lib
-  }
-  return {
-    kernelSmartAccountAddress: address
-  }
-}
 
 export function isAllowedSafeChain(chainId: number): boolean {
   return safeAllowedChains.some(chain => chain.id == chainId)
 }
 
-export async function createOrRestoreSafeSmartAccount(privateKey: string) {
-  const lib = new SafeSmartAccountLib({
-    privateKey,
-    chain: sepolia,
-    sponsored: true,
-    entryPointVersion: 7
-  })
-  await lib.init()
-  const address = lib.getAddress()
-  const key = `${sepolia.id}:${address}`
-  if (!smartAccountWallets[key]) {
-    smartAccountWallets[key] = lib
-  }
-  return {
-    safeSmartAccountAddress: address
-  }
-}
 export function removeSmartAccount(address: string) {
   const key = `${sepolia.id}:${address}`
   if (smartAccountWallets[key]) {
@@ -133,18 +99,6 @@ export function removeSmartAccount(address: string) {
   }
 }
 
-export async function createOrRestoreBiconomySmartAccount(privateKey: string) {
-  const lib = new BiconomySmartAccountLib({ privateKey, chain: sepolia, sponsored: true })
-  await lib.init()
-  const address = lib.getAddress()
-  const key = `${sepolia.id}:${address}`
-  if (!smartAccountWallets[key]) {
-    smartAccountWallets[key] = lib
-  }
-  return {
-    biconomySmartAccountAddress: address
-  }
-}
 
 export async function createOrRestoreCasaSmartAccount(privateKey: string) {
   const addresses = await Promise.all(allowedChains.map(async (chain) => {

@@ -1,8 +1,5 @@
 import { createOrRestoreEIP155Wallet } from '@/utils/EIP155WalletUtil'
 import {
-  createOrRestoreBiconomySmartAccount,
-  createOrRestoreKernelSmartAccount,
-  createOrRestoreSafeSmartAccount,
   removeSmartAccount
 } from '@/utils/SmartAccountUtil'
 import { Verify, SessionTypes } from '@walletconnect/types'
@@ -208,10 +205,6 @@ const SettingsStore = {
     state.kernelSmartAccountEnabled = !state.kernelSmartAccountEnabled
     if (state.kernelSmartAccountEnabled) {
       const { eip155Addresses, eip155Wallets } = createOrRestoreEIP155Wallet()
-      const { kernelSmartAccountAddress } = await createOrRestoreKernelSmartAccount(
-        eip155Wallets[eip155Addresses[0]].getPrivateKey()
-      )
-      SettingsStore.setKernelSmartAccountAddress(kernelSmartAccountAddress)
       localStorage.setItem(ZERO_DEV_SMART_ACCOUNTS_ENABLED_KEY, 'YES')
     } else {
       removeSmartAccount(SettingsStore.state.kernelSmartAccountAddress)
@@ -226,10 +219,6 @@ const SettingsStore = {
     state.safeSmartAccountEnabled = !state.safeSmartAccountEnabled
     if (state.safeSmartAccountEnabled) {
       const { eip155Addresses, eip155Wallets } = createOrRestoreEIP155Wallet()
-      const { safeSmartAccountAddress } = await createOrRestoreSafeSmartAccount(
-        eip155Wallets[eip155Addresses[0]].getPrivateKey()
-      )
-      SettingsStore.setSafeSmartAccountAddress(safeSmartAccountAddress)
       localStorage.setItem(SAFE_SMART_ACCOUNTS_ENABLED_KEY, 'YES')
     } else {
       removeSmartAccount(SettingsStore.state.safeSmartAccountAddress)
@@ -244,10 +233,6 @@ const SettingsStore = {
     state.biconomySmartAccountEnabled = !state.biconomySmartAccountEnabled
     if (state.biconomySmartAccountEnabled) {
       const { eip155Addresses, eip155Wallets } = createOrRestoreEIP155Wallet()
-      const { biconomySmartAccountAddress } = await createOrRestoreBiconomySmartAccount(
-        eip155Wallets[eip155Addresses[0]].getPrivateKey()
-      )
-      SettingsStore.setBiconomySmartAccountAddress(biconomySmartAccountAddress)
       localStorage.setItem(BICONOMY_SMART_ACCOUNTS_ENABLED_KEY, 'YES')
     } else {
       removeSmartAccount(SettingsStore.state.biconomySmartAccountAddress)

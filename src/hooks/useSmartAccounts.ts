@@ -1,9 +1,6 @@
 import SettingsStore from '@/store/SettingsStore'
 import {
-  createOrRestoreBiconomySmartAccount,
   createOrRestoreCasaSmartAccount,
-  createOrRestoreKernelSmartAccount,
-  createOrRestoreSafeSmartAccount,
   smartAccountWallets
 } from '@/utils/SmartAccountUtil'
 
@@ -18,23 +15,6 @@ export default function useSmartAccounts() {
   } = useSnapshot(SettingsStore.state)
 
   const initializeSmartAccounts = async (privateKey: string) => {
-    if (smartAccountEnabled) {
-      if (kernelSmartAccountEnabled) {
-        const { kernelSmartAccountAddress } = await createOrRestoreKernelSmartAccount(privateKey)
-        SettingsStore.setKernelSmartAccountAddress(kernelSmartAccountAddress)
-      }
-      if (safeSmartAccountEnabled) {
-        const { safeSmartAccountAddress } = await createOrRestoreSafeSmartAccount(privateKey)
-        SettingsStore.setSafeSmartAccountAddress(safeSmartAccountAddress)
-      }
-      if (biconomySmartAccountEnabled) {
-        const { biconomySmartAccountAddress } = await createOrRestoreBiconomySmartAccount(
-          privateKey
-        )
-        SettingsStore.setBiconomySmartAccountAddress(biconomySmartAccountAddress)
-      }
-    }
-
     const { casaSmartAccountAddress } = await createOrRestoreCasaSmartAccount(privateKey)
     SettingsStore.setCasaSmartAccountAddress(casaSmartAccountAddress)
 
