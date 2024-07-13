@@ -247,7 +247,7 @@ export default function SessionProposalModal() {
         proposal: proposal.params,
         supportedNamespaces
       })
-    } catch (e) {}
+    } catch (e) { }
   }, [proposal.params, supportedNamespaces])
 
   const reorderedEip155Accounts = usePriorityAccounts({ namespaces })
@@ -339,28 +339,17 @@ export default function SessionProposalModal() {
       </Row>
       <Grid.Container style={{ marginBottom: '10px', marginTop: '10px' }} justify={'space-between'}>
         <Grid>
-          <Row style={{ color: 'GrayText' }}>Accounts</Row>
-          {(supportedChains.length > 0 &&
-            supportedChains.map((chain, i) => {
-              return (
-                <Row key={i}>
-                  <ChainAddressMini key={i} address={getAddress(chain?.namespace) || 'test'} />
-                </Row>
-              )
-            })) || <Row>Non available</Row>}
-
           <Row style={{ color: 'GrayText' }}>Smart Accounts</Row>
-          {smartAccountEnabled &&
-            getAvailableSmartAccounts().map((account, i) => {
-              if (!account) {
-                return <></>
-              }
-              return (
-                <Row key={i}>
-                  <ChainSmartAddressMini account={account} />
-                </Row>
-              )
-            })}
+          {getAvailableSmartAccounts().map((account, i) => {
+            if (!account) {
+              return <></>
+            }
+            return (
+              <Row key={i}>
+                <ChainSmartAddressMini account={account} />
+              </Row>
+            )
+          })}
         </Grid>
         <Grid>
           <Row style={{ color: 'GrayText' }} justify="flex-end">
