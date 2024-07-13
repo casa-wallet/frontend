@@ -63,7 +63,7 @@ const zeroSepolia = defineChain({
 
 
 // Types
-export const allowedChains = [
+export const allowedChains1 = [
   sepolia,
   polygonMumbai,
   goerli,
@@ -78,6 +78,12 @@ export const allowedChains = [
   rootstockTestnet,
   zircuitTestnet
 ]
+
+export const allowedChains = [
+  arbitrumSepolia,
+  baseSepolia,
+]
+
 // build chains so I can access them by id
 export const chains = allowedChains.reduce((acc, chain) => {
   acc[chain.id] = chain

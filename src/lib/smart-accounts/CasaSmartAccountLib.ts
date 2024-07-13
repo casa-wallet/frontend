@@ -2,16 +2,90 @@ import {
     PrivateKeyAccount,
     Hex,
     Address,
+    PublicClient,
 } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { EIP155Wallet } from '../EIP155Lib'
 import { Chain } from '@/consts/smartAccounts'
 import { JsonRpcProvider } from '@ethersproject/providers'
+import { getPublicClient } from '@/utils/ERC7579AccountUtils'
 
 type CasaSmartAccountLibOptions = {
     privateKey: string
     chain: Chain
 }
+
+
+const FactoryAddress = "0xE09B140b20D20eF7Ce86B595fE1cc32acD7d5f99"
+
+const FactoryABI = [
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            }
+        ],
+        "name": "createWallet",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "wallet",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "index",
+                "type": "uint256"
+            }
+        ],
+        "name": "getWallet",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "exists",
+                "type": "bool"
+            },
+            {
+                "internalType": "address",
+                "name": "wallet",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "implementation",
+        "outputs": [
+            {
+                "internalType": "contract Wallet",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]
 
 
 export class CasaSmartAccountLib implements EIP155Wallet {
@@ -25,6 +99,11 @@ export class CasaSmartAccountLib implements EIP155Wallet {
     protected signer: PrivateKeyAccount
     #signerPrivateKey: string
 
+    private publicClient: PublicClient | undefined
+    private address: Address = '0x'
+    public isDeployed: boolean = false
+
+
     public constructor({
         privateKey,
         chain,
@@ -34,7 +113,19 @@ export class CasaSmartAccountLib implements EIP155Wallet {
         this.signer = privateKeyToAccount(privateKey as Hex)
     }
 
-    async init() { }
+    async init() {
+        this.publicClient = await getPublicClient(this.chain)
+
+        const data = await this.publicClient.readContract({
+            address: FactoryAddress,
+            abi: FactoryABI,
+            functionName: 'getWallet',
+            args: [this.signer.address, 0]
+        })
+
+        this.isDeployed = (data as any)[0];
+        this.address = (data as any)[1];
+    }
 
     connect(_provider: JsonRpcProvider): any {
         return this
@@ -48,7 +139,7 @@ export class CasaSmartAccountLib implements EIP155Wallet {
         return this.#signerPrivateKey
     }
     getAddress(): Address {
-        return "0x000000000000000000000000000000000000b00b"
+        return this.address
     }
 
     async signMessage(message: string): Promise<string> {
