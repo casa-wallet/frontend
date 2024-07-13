@@ -118,6 +118,144 @@ export const EIP155_TEST_CHAINS: Record<string, EIP155Chain> = {
   }
 }
 
+export const EIP155_CASA_CHAINS = {
+  'eip155:421613': {
+    chainId: 421613,
+    name: 'Arbitrum Goerli',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://arbitrum-goerli.publicnode.com',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:421614': {
+    chainId: 421614,
+    name: 'Arbitrum Sepolia',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://public.stackup.sh/api/v1/node/arbitrum-sepolia',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:84531': {
+    chainId: 84531,
+    name: 'Base Goerli Testnet',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://base-goerli.public.blastapi.io',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:84532': {
+    chainId: 84532,
+    name: 'Base Sepolia Testnet',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://base-sepolia-rpc.publicnode.com',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:42220': {
+    chainId: 42220,
+    name: 'Celo Mainnet',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://rpc.ankr.com/celo',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:44787': {
+    chainId: 44787,
+    name: 'Celo Alfajores Testnet',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://alfajores-forno.celo-testnet.org',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:534351': {
+    chainId: 534351,
+    name: 'Scroll Sepolia Testnet',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://sepolia-rpc.scroll.io',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:1798': {
+    chainId: 1798,
+    name: 'ApeChain Jenkins Testnet',
+    logo: 'https://cryptologos.cc/logos/apecoin-ape-ape-logo.png?v=031',
+    rgb: '242, 242, 242',
+    rpc: 'https://jenkins.rpc.caldera.xyz/http',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:2810': {
+    chainId: 2810,
+    name: 'Morph Holesky',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://rpc-holesky.morphl2.io',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:59144': {
+    chainId: 59144,
+    name: 'Linea',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://rpc.linea.build',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:59140': {
+    chainId: 59140,
+    name: 'Linea Goerli',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://rpc.goerli.linea.build',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:59141': {
+    chainId: 59141,
+    name: 'Morph Holesky',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://rpc.sepolia.linea.build',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:245022926': {
+    chainId: 245022926,
+    name: 'Neon EVM Devnet',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://devnet.neonevm.org',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:31': {
+    chainId: 31,
+    name: 'Rootstock Testnet',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://public-node.testnet.rsk.co',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+  'eip155:48899': {
+    chainId: 48899,
+    name: 'Zircuit Testnet',
+    logo: '/chain-logos/eip155-1.png',
+    rgb: '242, 242, 242',
+    rpc: 'https://zircuit1.p2pify.com',
+    namespace: 'eip155',
+    smartAccountEnabled: true
+  },
+}
+
 export const EIP155_CHAINS = { ...EIP155_MAINNET_CHAINS, ...EIP155_TEST_CHAINS }
 
 /**

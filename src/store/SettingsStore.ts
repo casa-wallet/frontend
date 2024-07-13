@@ -13,6 +13,7 @@ const SMART_ACCOUNTS_ENABLED_KEY = 'SMART_ACCOUNTS'
 const ZERO_DEV_SMART_ACCOUNTS_ENABLED_KEY = 'ZERO_DEV_SMART_ACCOUNTS'
 const SAFE_SMART_ACCOUNTS_ENABLED_KEY = 'SAFE_SMART_ACCOUNTS'
 const BICONOMY_SMART_ACCOUNTS_ENABLED_KEY = 'BICONOMY_SMART_ACCOUNTS'
+const CASA_SMART_ACCOUNTS_ENABLED_KEY = 'CASA_SMART_ACCOUNTS_ENABLED_KEY'
 const MODULE_MANAGEMENT_ENABLED_KEY = 'MODULE_MANAGEMENT'
 
 /**
@@ -42,6 +43,7 @@ interface State {
   kernelSmartAccountEnabled: boolean
   safeSmartAccountEnabled: boolean
   biconomySmartAccountEnabled: boolean
+  casaSmartAccountEnabled: boolean
   moduleManagementEnabled: boolean
 }
 
@@ -85,6 +87,10 @@ const state = proxy<State>({
   biconomySmartAccountEnabled:
     typeof localStorage !== 'undefined'
       ? Boolean(localStorage.getItem(BICONOMY_SMART_ACCOUNTS_ENABLED_KEY))
+      : false,
+  casaSmartAccountEnabled:
+    typeof localStorage !== 'undefined'
+      ? Boolean(localStorage.getItem(CASA_SMART_ACCOUNTS_ENABLED_KEY))
       : false,
   moduleManagementEnabled:
     typeof localStorage !== 'undefined'
@@ -147,6 +153,9 @@ const SettingsStore = {
   },
   setBiconomySmartAccountAddress(smartAccountAddress: string) {
     state.biconomySmartAccountAddress = smartAccountAddress
+  },
+  setCasaSmartAccountAddress(smartAccountAddress: string) {
+    state.casaSmartAccountAddress = smartAccountAddress
   },
 
   setActiveChainId(value: string) {

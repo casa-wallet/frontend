@@ -1,6 +1,7 @@
 import SettingsStore from '@/store/SettingsStore'
 import {
   createOrRestoreBiconomySmartAccount,
+  createOrRestoreCasaSmartAccount,
   createOrRestoreKernelSmartAccount,
   createOrRestoreSafeSmartAccount,
   smartAccountWallets
@@ -32,6 +33,8 @@ export default function useSmartAccounts() {
         )
         SettingsStore.setBiconomySmartAccountAddress(biconomySmartAccountAddress)
       }
+      const { casaSmartAccountAddress } = await createOrRestoreCasaSmartAccount(privateKey)
+      SettingsStore.setCasaSmartAccountAddress(casaSmartAccountAddress)
     }
   }
 

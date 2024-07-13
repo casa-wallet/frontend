@@ -6,6 +6,7 @@ import { KernelSmartAccountLib } from '@/lib/smart-accounts/KernelSmartAccountLi
 import { sepolia } from 'viem/chains'
 import { SafeSmartAccountLib } from '@/lib/smart-accounts/SafeSmartAccountLib'
 import { SmartAccountLib } from '@/lib/smart-accounts/SmartAccountLib'
+import { CasaSmartAccountLib } from '@/lib/smart-accounts/CasaSmartAccountLib'
 
 export type UrlConfig = {
   chain: Chain
@@ -15,7 +16,7 @@ export type UrlConfig = {
 export const ENTRYPOINT_ADDRESSES: Record<Chain['name'], Hex> = {
   Sepolia: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
   'Polygon Mumbai': '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-  Goerli: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
+  Goerli: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
 }
 
 // Paymasters
@@ -80,7 +81,7 @@ export const kernelAllowedChains = [sepolia]
 export const safeAllowedChains = [sepolia]
 export const biconomyAllowedChains = [sepolia]
 
-export let smartAccountWallets: Record<string, SmartAccountLib | KernelSmartAccountLib> = {}
+export let smartAccountWallets: Record<string, SmartAccountLib | KernelSmartAccountLib | CasaSmartAccountLib> = {}
 
 export function isAllowedKernelChain(chainId: number): boolean {
   return kernelAllowedChains.some(chain => chain.id == chainId)
@@ -142,5 +143,24 @@ export async function createOrRestoreBiconomySmartAccount(privateKey: string) {
   }
   return {
     biconomySmartAccountAddress: address
+  }
+}
+
+export async function createOrRestoreCasaSmartAccount(privateKey: string) {
+  const addresses = await Promise.all(allowedChains.map(async (chain) => {
+
+    const lib = new CasaSmartAccountLib({ privateKey, chain })
+    await lib.init()
+    const address = lib.getAddress()
+    const key = `${chain.id}:${address}`
+    if (!smartAccountWallets[key]) {
+      smartAccountWallets[key] = lib
+    }
+    return address
+
+  }))
+
+  return {
+    casaSmartAccountAddress: addresses[0]
   }
 }
