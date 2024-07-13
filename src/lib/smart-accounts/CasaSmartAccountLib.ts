@@ -1,6 +1,7 @@
 import {
     PrivateKeyAccount,
     Hex,
+    Address,
 } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { EIP155Wallet } from '../EIP155Lib'
@@ -46,7 +47,7 @@ export class CasaSmartAccountLib implements EIP155Wallet {
     getPrivateKey(): string {
         return this.#signerPrivateKey
     }
-    getAddress(): string {
+    getAddress(): Address {
         return "0x000000000000000000000000000000000000b00b"
     }
 
@@ -65,6 +66,25 @@ export class CasaSmartAccountLib implements EIP155Wallet {
 
     async signTransaction(transaction: any): Promise<string> {
         throw new Error('Method not implemented.')
+    }
+
+    async sendBatchTransaction(
+        args: {
+            to: Address
+            value: bigint
+            data: Hex
+        }[]
+    ) {
+        throw new Error('Method not implemented.')
+    }
+
+    getAccount() {
+        throw new Error('Method not implemented.')
+
+        return {
+            address: this.getAddress(),
+            getInitCode: () => <Hex>('0x')
+        }
     }
 
 

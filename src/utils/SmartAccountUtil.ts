@@ -13,7 +13,7 @@ export type UrlConfig = {
 }
 
 // Entrypoints [I think this is constant but JIC]
-export const ENTRYPOINT_ADDRESSES: Record<Chain['name'], Hex> = {
+export const ENTRYPOINT_ADDRESSES: Record<string, Hex> = {
   Sepolia: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
   'Polygon Mumbai': '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
   Goerli: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
@@ -21,28 +21,28 @@ export const ENTRYPOINT_ADDRESSES: Record<Chain['name'], Hex> = {
 
 // Paymasters
 // https://docs.pimlico.io/paymaster/erc20-paymaster/contract-addresses
-export const PAYMASTER_ADDRESSES: Record<Chain['name'], Hex> = {
+export const PAYMASTER_ADDRESSES: Record<string, Hex> = {
   Sepolia: '0x0000000000325602a77416A16136FDafd04b299f',
   'Polygon Mumbai': '0x000000000009B901DeC1aaB9389285965F49D387',
   Goerli: '0xEc43912D8C772A0Eba5a27ea5804Ba14ab502009'
 }
 
 // USDC
-export const USDC_ADDRESSES: Record<Chain['name'], Hex> = {
+export const USDC_ADDRESSES: Record<string, Hex> = {
   Sepolia: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
   'Polygon Mumbai': '0x9999f7fea5938fd3b1e26a12c3f2fb024e194f97',
   Goerli: '0x07865c6e87b9f70255377e024ace6630c1eaa37f'
 }
 
 // RPC URLs
-export const RPC_URLS: Record<Chain['name'], string> = {
+export const RPC_URLS: Record<string, string> = {
   Sepolia: 'https://rpc.ankr.com/eth_sepolia',
   'Polygon Mumbai': 'https://mumbai.rpc.thirdweb.com',
   Goerli: 'https://ethereum-goerli.publicnode.com'
 }
 
 // Pimlico RPC names
-export const PIMLICO_NETWORK_NAMES: Record<Chain['name'], string> = {
+export const PIMLICO_NETWORK_NAMES: Record<string, string> = {
   Sepolia: 'sepolia',
   'Polygon Mumbai': 'mumbai',
   Goerli: 'goerli'
