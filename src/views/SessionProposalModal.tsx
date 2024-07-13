@@ -355,32 +355,16 @@ export default function SessionProposalModal() {
           <Row style={{ color: 'GrayText' }} justify="flex-end">
             Chains
           </Row>
-          {(supportedChains.length > 0 &&
-            supportedChains.map((chain, i) => {
-              if (!chain) {
-                return <></>
-              }
-
-              return (
-                <Row key={i}>
-                  <ChainDataMini key={i} chainId={`${chain?.namespace}:${chain?.chainId}`} />
-                </Row>
-              )
-            })) || <Row>Non available</Row>}
-          <Row style={{ color: 'GrayText' }} justify="flex-end">
-            Chains
-          </Row>
-          {smartAccountEnabled &&
-            getAvailableSmartAccounts().map(({ chain }, i) => {
-              if (!chain) {
-                return <></>
-              }
-              return (
-                <Row key={i} style={{ marginTop: '24px' }}>
-                  <ChainDataMini key={i} chainId={`eip155:${chain.id}`} />
-                </Row>
-              )
-            })}
+          {getAvailableSmartAccounts().map(({ chain }, i) => {
+            if (!chain) {
+              return <></>
+            }
+            return (
+              <Row key={i} style={{ marginTop: '24px' }}>
+                <ChainDataMini key={i} chainId={`eip155:${chain.id}`} />
+              </Row>
+            )
+          })}
         </Grid>
       </Grid.Container>
     </RequestModal>
