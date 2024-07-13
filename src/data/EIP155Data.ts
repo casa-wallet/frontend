@@ -202,7 +202,7 @@ export const EIP155_CASA_CHAINS = {
   },
 }
 
-export const EIP155_CHAINS = { ...EIP155_MAINNET_CHAINS, ...EIP155_TEST_CHAINS, ...EIP155_CASA_CHAINS }
+export const EIP155_CHAINS = EIP155_CASA_CHAINS
 
 /**
  * Methods
