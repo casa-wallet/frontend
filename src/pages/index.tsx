@@ -45,7 +45,7 @@ export default function HomePage() {
                     >
                       <AccountCard
                         key={`${name}-${account.type.toLowerCase()}`}
-                        name={`${account.type} - ${name}`}
+                        name={name}
                         logo={logo}
                         rgb={rgb}
                         address={account.address}
