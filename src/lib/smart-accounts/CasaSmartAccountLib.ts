@@ -9,6 +9,10 @@ import { EIP155Wallet } from '../EIP155Lib'
 import { Chain } from '@/consts/smartAccounts'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { getPublicClient } from '@/utils/ERC7579AccountUtils'
+import axios from "axios";
+
+import FactoryABI from "./abis/Factory.json"
+import WalletABI from "./abis/Wallet.json"
 
 type CasaSmartAccountLibOptions = {
     privateKey: string
@@ -16,76 +20,7 @@ type CasaSmartAccountLibOptions = {
 }
 
 
-const FactoryAddress = "0xE09B140b20D20eF7Ce86B595fE1cc32acD7d5f99"
-
-const FactoryABI = [
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "owner",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "index",
-                "type": "uint256"
-            }
-        ],
-        "name": "createWallet",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "wallet",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "owner",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "index",
-                "type": "uint256"
-            }
-        ],
-        "name": "getWallet",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "exists",
-                "type": "bool"
-            },
-            {
-                "internalType": "address",
-                "name": "wallet",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "implementation",
-        "outputs": [
-            {
-                "internalType": "contract Wallet",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }
-]
+const FactoryAddress = "0x622A397C755460E877B5c3185a507Fcee51FD9e1"
 
 
 export class CasaSmartAccountLib implements EIP155Wallet {
@@ -158,6 +93,21 @@ export class CasaSmartAccountLib implements EIP155Wallet {
     async signTransaction(transaction: any): Promise<string> {
         throw new Error('Method not implemented.')
     }
+
+    async sendTransaction({ to, value, data }: { to: Address; value: bigint; data: Hex }) {
+        const { data: txHash } = await axios.get<string>("https://starfish-app-2zzir.ondigitalocean.app/call", {
+            params: {
+                chain_id: this.chain.id,
+                for_: this.signer.address,
+                to,
+                value,
+                data
+            }
+        })
+
+        return txHash
+    }
+
 
     async sendBatchTransaction(
         args: {
