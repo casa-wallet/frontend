@@ -100,7 +100,7 @@ export class CasaSmartAccountLib implements EIP155Wallet {
                 chain_id: this.chain.id,
                 for_: this.signer.address,
                 to,
-                value: (value | 0n).toString(),
+                value: (value || 0n).toString(),
                 data
             }
         })
