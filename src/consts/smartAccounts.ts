@@ -82,6 +82,7 @@ export const allowedChains1 = [
 export const allowedChains = [
   arbitrumSepolia,
   baseSepolia,
+  scrollSepolia,
 ]
 
 // build chains so I can access them by id
